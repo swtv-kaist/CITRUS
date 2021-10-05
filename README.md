@@ -40,8 +40,7 @@ CITRUS will be built in `build` directory.
 We provide the target programs we use for our experiment at 
 `replication` directory. For simplicity, you can execute the following shell script (from the CITRUS **root** project directory) to build all our experiments subjects.
 ```shell
-./scripts/bootstrap.sh ${TARGET_DIR}
-# e.g., ./scripts/bootstrap.sh subjects
+./scripts/bootstrap.sh subjects             # to build in subjects dir
 ```
 
 ## Running CITRUS Method Call Sequence Generation
@@ -58,9 +57,9 @@ Currently CITRUS only supports command-line interface.
 ```
 For easier usage, we recommend to write separate shell script(s) to configure the command-line arguments as demonstrated in `run` directory. For example, to run CITRUS on `hjson` library:
 ```shell
-./run/hjson.sh ${TIMEOUT} ${OUT_PREFIX} ${SUBJECT_DIR}
-# e.g., ./run/hjson.sh 43200 tc_hjson subjects          # 12 hours
+./run/hjson.sh 43200 tc_hjson subjects/hjson-cpp          # 12 hours
 ```
+where `tc_hjson` represents the target directory where the generated test cases will be put at, and `subjects/hjson-cpp` represents the `hjson` directory.
 
 ## Running CITRUS libfuzzer
 
@@ -70,13 +69,13 @@ To ease the libfuzzer stage, we provide `batch_libfuzzer.py` script (i.e., CITRU
 ```shell
 # Compilation (from out_libfuzzer directory)
 python3 batch_libfuzzer gen             # initializes the scripts
-./tst_compile.sh
+./tst_compile.sh                        # compile all harness drivers
 
 # Running libfuzzer
 ./tst_run.sh                            # default: 5 mins each driver
 
 # Replaying libfuzzer generated test cases
-./tst_repl.sh
+./tst_repl.sh                           
 ```
 
 ---
